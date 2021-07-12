@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" > </script>
+    <script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js" > </script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src = "config.js"></script>
+<script>
+
+
+</script>
+    <title>Movie Seat Booking</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-sm bg-light">
+
+  <!-- Links -->
+      <a align="left" class="nav-link" href="home.html">Home</a>
+
+</nav>
+    <div class="movie-container">
+      <label>Select a Slot</label>
+      <select id="movie">
+        <option value="10">Kanpur (Parade) ($10)</option>
+        <option value="12"> Lucknow(Amausi) ($12)</option>
+        <option value="8">Noida(Sector 18) ($8)</option>
+        <option value="9">Delhi(Sansad bhawan) ($9)</option>
+      </select>
+    </div>
+
+    <ul class="showcase">
+      <li>
+        <div class="seat"></div>
+        <small>N/A</small>
+      </li>
+      <li>
+        <div class="seat selected"></div>
+        <small>Selected</small>
+      </li>
+      <li>
+        <div class="seat occupied"></div>
+        <small>Occupied</small>
+      </li>
+    </ul>
+
+    <div class="container">
+      <div class="screen"></div>
+
+      <div class="row">
+        <div class="seat" tabindex="1" id = "A1" onclick="A1()"></div>
+        <div class="seat" tabindex="2" id = "A2" onclick="A2()"></div>
+        <div class="seat" tabindex="3" id = "A3" onclick="A3()"></div>
+        <div class="seat" tabindex="4" id = "A4" onclick="A4()"></div>
+        <div class="seat" tabindex="5" id = "A5" onclick="A5()"></div>
+        <div class="seat" tabindex="6" id = "A6" onclick="A6()"></div>
+        <div class="seat" tabindex="7" id = "A7" onclick="A7()"></div>
+        <div class="seat" tabindex="8" id = "A8" onclick="A8()"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat" tabindex="9" id = "B1" onclick="B1()"></div>
+        <div class="seat" tabindex="10" id = "B2" onclick="B2()"></div>
+        <div class="seat" tabindex="11" id = "B3" onclick="B3()"></div>
+        <div class="seat" tabindex="12" id = "B4" onclick="B4()"></div>
+        <div class="seat" tabindex="13" id = "B5" onclick="B5()"></div>
+        <div class="seat" tabindex="14" id = "B6" onclick="B6()"></div>
+        <div class="seat" tabindex="15" id = "B7" onclick="B7()"></div>
+        <div class="seat" tabindex="16" id = "B8" onclick="B8()"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat" tabindex="17" id = "C1" onclick="C1()"></div>
+        <div class="seat" tabindex="18" id = "C2" onclick="C2()"></div>
+        <div class="seat" tabindex="19" id = "C3" onclick="C3()"></div>
+        <div class="seat" tabindex="20" id = "C4" onclick="C4()"></div>
+        <div class="seat" tabindex="21" id = "C5" onclick="C5()"></div>
+        <div class="seat" tabindex="22" id = "C6" onclick="C6()"></div>
+        <div class="seat" tabindex="23" id = "C7" onclick="C7()"></div>
+        <div class="seat" tabindex="24" id = "C8" onclick="C8()"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat" tabindex="25" id = "D1" onclick="D1()"></div>
+        <div class="seat" tabindex="26" id = "D2" onclick="D2()"></div>
+        <div class="seat" tabindex="27" id = "D3" onclick="D3()"></div>
+        <div class="seat" tabindex="28" id = "D4" onclick="D4()"></div>
+        <div class="seat" tabindex="29" id = "D5" onclick="D5()"></div>
+        <div class="seat" tabindex="30" id = "D6" onclick="D6()"></div>
+        <div class="seat" tabindex="31" id = "D7" onclick="D7()"></div>
+        <div class="seat" tabindex="32" id = "D8" onclick="D8()"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat" tabindex="33" id = "E1" onclick="E1()"></div>
+        <div class="seat" tabindex="34" id = "E2" onclick="E2()"></div>
+        <div class="seat" tabindex="35" id = "E3" onclick="E3()"></div>
+        <div class="seat" tabindex="36" id = "E4" onclick="E4()"></div>
+        <div class="seat" tabindex="37" id = "E5" onclick="E5()"></div>
+        <div class="seat" tabindex="38" id = "E6" onclick="E6()"></div>
+        <div class="seat" tabindex="39" id = "E7" onclick="E7()"></div>
+        <div class="seat" tabindex="40" id = "E8" onclick="E8()"></div>
+      </div>
+
+      <div class="row">
+        <div class="seat" tabindex="41" id = "F1" onclick="F1()"></div>
+        <div class="seat" tabindex="42" id = "F2" onclick="F2()"></div>
+        <div class="seat" tabindex="43" id = "F3" onclick="F3()"></div>
+        <div class="seat" tabindex="44" id = "F4" onclick="F4()"></div>
+        <div class="seat" tabindex="45" id = "F5" onclick="F5()"></div>
+        <div class="seat" tabindex="46" id = "F6" onclick="F6()"></div>
+        <div class="seat" tabindex="47" id = "F7" onclick="F7()"></div>
+        <div class="seat" tabindex="48" id = "F8" onclick="F8()"></div>
+      </div>
+    </div>
+    <div class="row">
+  <button  id="check" style="margin:5px;" class="btn btn" onclick="check()">Check Booked Slot</button>
+  <button  id="Submit" style="margin:5px;" class="btn btn-success" onclick="Submit()">SUBMIT</button>
+  </div>
+    <p class="text">
+    </p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="slot selection.js" type="text/javascript"></script>
+  </body>
+</html>

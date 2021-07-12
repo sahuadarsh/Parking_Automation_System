@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" > </script>
+<script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js" > </script>
+<script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+<script src = "C:/Users/adars/OneDrive/Desktop/parking Automation System/project web Application/config.js"></script>
+<title></title>
+</head>
+<body>
+<script>
+function In_time(){
+    firebase.auth().onAuthStateChanged(async function(user) {
+    if (user) {
+        var current = new Date();
+        var db = firebase.firestore();
+        console.log("login successful!");
+        var user = firebase.auth().currentUser;
+        var key = user.uid;
+        console.log(key);
+     const x =  await localStorage.getItem("data_x");
+     const obj = JSON.parse(x);
+     const doc_id=null;
+        const slot_data =await db.collection('Slots').doc(obj.id);
+        const doc1 = await slot_data.get();
+        if (!doc1.exists){
+            window.alert("Don't have any data");
+        }
+        else{
+           await firebase.firestore().collection("History").where("Uid", "==", obj.id).where("In_Time", "==" , "null")
+  .get()
+  .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+          doc.ref.update({"In_Time":current.toLocaleTimeString()});
+      });
+ })
+  window.alert("Successfully Enter the Car");
+}
+}
+});
+}
+ async function Out_time(){
+    firebase.auth().onAuthStateChanged(async function(user) {
+    if (user) {
+        var current = new Date();
+        var db = firebase.firestore();
+        console.log("login successful!");
+     const x =  await localStorage.getItem("data_x");
+     const obj = JSON.parse(x);
+     console.log(obj.id);
+     console.log(obj.slot);
+     const doc_id=null;
+        const slot_data =await db.collection('Slots').doc(obj.id);
+        const doc1 = await slot_data.get();
+        if (!doc1.exists){
+            window.alert("Don't have any data");
+        }
+        else{
+           await firebase.firestore().collection("History").where("Uid", "==", obj.id).where("Out_Time", "==" , "null")
+  .get()
+  .then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+          console.log(doc.id, " => ", doc.data());
+          doc.ref.update({"Out_Time":current.toLocaleTimeString()});
+      });
+ })
+ const res = await db.collection("Slots").doc(obj.id).delete();
+ window.alert("Successfully Out Car from the parking");
+}
+}
+});
+}
+
+</script>
+<!--To Read QR Code-->
+
+<div style="text-align:center;">
+<video id="video" width="300" height="300" autoplay></video>
+</div>
+<div style="text-align:center;">
+<input type="file" id="file" name="file">
+</div>
+
+<div id="content"></div>
+<div style="text-align:center;margin-top:30px;">
+<button  class="btn btn-success" onclick="In_time()">In Time</button>
+<button  class="btn btn-danger" onclick="Out_time()">Out Time</button>
+</div>
+
+<script>
+var video = document.getElementById('video');
+
+// Get access to the camera!
+if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    // Not adding `{ audio: true }` since we only want video now
+    navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+        video.srcObject = stream;
+        video.play();
+    });
+}
+// Elements for taking the snapshot
+var canvas = document.getElementById('canvas');
+var video = document.getElementById('video');
+
+// Trigger photo take
+</script>
+
+<script type="text/javascript" src="qrReader.js"></script>
+</body>
+</html>

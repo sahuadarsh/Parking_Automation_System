@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" > </script>
+    <script src = "https://www.gstatic.com/firebasejs/8.6.3/firebase-firestore.js" > </script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+    <script src = "config.js"></script>
+    <title>Parking Automation system!</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="lightblue" class="bi bi-box-seam" viewBox="0 0 16 16">
+  <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>
+</svg>
+        <a class="navbar-brand px-3" href="#">Parking Automation System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class = "navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h3>Please Register Here:</h3>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="name" class="form-control"id="name" placeholder="full name" oninput="this.value = this.value.toUpperCase()" required>
+            </div>
+                <div class="form-group">
+                    <label for="email">Email Id</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control"  id="password" placeholder="Password" required>
+                </div>
+            <div class="form-group col-md-6">
+                <label for="conf_password">Confirm Password</label>
+                <input type="password" class="form-control" id="conf_password" placeholder="Confirm Password" required>
+            </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address 2</label>
+                <input type="address" class="form-control" id="address" oninput="this.value = this.value.toUpperCase()" placeholder="Apartment, studio, or floor" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="city">City</label>
+                    <input type="city" class="form-control" id="city" oninput="this.value = this.value.toUpperCase()" placeholder = "city" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="state">State</label>
+                    <select name="state" id="state" class="form-control">
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                    <option value="Daman and Diu">Daman and Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="West Bengal">West Bengal</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="zip">Zip</label>
+                    <input type="number" class="form-control" id="zip" placeholder = "Zip" requied>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="Vehicle No.">Vehicle No.</label>
+                    <input type="text" class="form-control" id="Vehicle_no" oninput="this.value = this.value.toUpperCase()" placeholder = "vehicle No.">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="phone">Mobile Number</label>
+<input type="tel" class = "form-control" id="mobile_no" name="phone" placeholder="123-456-7890"
+pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"required>
+                </div>
+            </div>
+            <div class="form-group col-md-1">
+                    <label for="Gender"><b>Gender</b></label>
+                    <input type="text" class="form-control" id="gender" oninput="this.value = this.value.toUpperCase()" placeholder = "gender">
+                    </div>
+            <div class= "form-group col-mid-1">
+            <button  id="register" class="btn btn-success">SUBMIT</button>
+            </div>
+    </div>
+
+<!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4">
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3" style="background-color:black;color:white";>© 2021 Copyright :
+<a href="#" style="color:white";> Parking Automation System</a>
+</div>
+<!-- Copyright -->
+</footer>
+</body>
+ <script src="register.js"></script>
+</html>
+
